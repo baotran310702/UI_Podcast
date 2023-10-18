@@ -31,7 +31,9 @@ class PodCastHome extends StatelessWidget {
           ]),
           SearchHome(),
           Category(),
-          BestPodcast()
+          BestPodcast(
+            Amount: 5,
+          )
         ],
       ),
     );

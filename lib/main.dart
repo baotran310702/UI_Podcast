@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home/home.dart';
+import 'podcast_player/podcast_player.dart';
 
 void main() {
   runApp(const PodCastApp());
@@ -10,13 +11,21 @@ class PodCastApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: "PodCastApp",
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
+      home: const SafeArea(
           child: Scaffold(
         body: PodCastHome(),
       )),
+      routes: {
+        '/podcastPlayer': (context) => const Scaffold(
+              body: PodcastPlayer(),
+            ),
+        '/home': (context) => const Scaffold(
+              body: PodCastHome(),
+            )
+      },
     );
   }
 }
