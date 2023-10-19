@@ -45,14 +45,19 @@ class _PodCastApp extends State<PodCastApp> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
-          body: PageView(
-            controller: _pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            children: List.generate(
-                bottomBarPages.length, (index) => bottomBarPages[index]),
-          ),
-          bottomNavigationBar: (bottomBarPages.length <= maxCount)
-              ? AnimatedNotchBottomBar(
+          body: Stack(
+            children: [
+              PageView(
+                controller: _pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: List.generate(
+                    bottomBarPages.length, (index) => bottomBarPages[index]),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: AnimatedNotchBottomBar(
                   notchBottomBarController: _controller,
                   showShadow: false,
                   durationInMilliSeconds: 300,
@@ -145,8 +150,10 @@ class _PodCastApp extends State<PodCastApp> {
                   onTap: (int index) {
                     _pageController.jumpToPage(index);
                   },
-                )
-              : null,
+                ),
+              ),
+            ],
+          ),
           extendBody: true,
         ),
       ),
@@ -154,10 +161,8 @@ class _PodCastApp extends State<PodCastApp> {
         PodcastPlayer.route: (context) {
           final Map arguments =
               ModalRoute.of(context)!.settings.arguments as Map;
-          return Scaffold(
-            body: PodcastPlayer(
-              arguments: arguments,
-            ),
+          return PodcastPlayer(
+            arguments: arguments,
           );
         },
         PodCastHome.route: (context) => const Scaffold(

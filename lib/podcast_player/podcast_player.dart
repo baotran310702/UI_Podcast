@@ -13,8 +13,6 @@ class PodcastPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Testing arguments");
-    print(arguments!['listPodcast']);
     return Container(
       width: MediaQuery.of(context).size.width,
       height: double.infinity,
