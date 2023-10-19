@@ -8,11 +8,18 @@ void main() {
   runApp(const PodCastApp());
 }
 
-class PodCastApp extends StatelessWidget {
+class PodCastApp extends StatefulWidget {
   const PodCastApp({super.key});
 
   @override
+  _PodCastApp createState() => _PodCastApp();
+}
+
+class _PodCastApp extends State<PodCastApp> {
+  @override
   Widget build(BuildContext context) {
+    int maxCount = 5;
+
     /// Controller to handle PageView and also handles initial page
     final _pageController = PageController(initialPage: 0);
 
@@ -23,117 +30,126 @@ class PodCastApp extends StatelessWidget {
       const PodCastHome(),
       const PodCastHome(),
       const PodCastHome(),
-      const PodCastHome(),
+      const PodcastPlayer(),
       const PodCastHome(),
     ];
+
+    @override
+    void dispose() {
+      _pageController.dispose();
+      super.dispose();
+    }
 
     return MaterialApp(
       title: "PodCastApp",
       debugShowCheckedModeBanner: false,
       home: SafeArea(
-          child: Scaffold(
-        body: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: List.generate(
-              bottomBarPages.length, (index) => bottomBarPages[index]),
+        child: Scaffold(
+          body: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: List.generate(
+                bottomBarPages.length, (index) => bottomBarPages[index]),
+          ),
+          bottomNavigationBar: (bottomBarPages.length <= maxCount)
+              ? AnimatedNotchBottomBar(
+                  notchBottomBarController: _controller,
+                  showShadow: false,
+                  durationInMilliSeconds: 300,
+                  color: const Color(0xFF222B45),
+                  showLabel: true,
+                  notchColor: const Color(0xFFE22F67),
+                  bottomBarWidth: MediaQuery.of(context).size.width,
+                  removeMargins: false,
+                  bottomBarItems: const [
+                    BottomBarItem(
+                        inActiveItem: Center(
+                            child: FaIcon(
+                          FontAwesomeIcons.house,
+                          size: 16,
+                          color: Colors.white38,
+                        )),
+                        activeItem: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.house,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                        itemLabel: "Home"),
+                    BottomBarItem(
+                        inActiveItem: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.fire,
+                            size: 16,
+                            color: Colors.white38,
+                          ),
+                        ),
+                        activeItem: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.fire,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                        itemLabel: "Trending"),
+                    BottomBarItem(
+                        inActiveItem: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.compass,
+                            size: 16,
+                            color: Colors.white38,
+                          ),
+                        ),
+                        activeItem: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.compass,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                        itemLabel: "Explore"),
+                    BottomBarItem(
+                        inActiveItem: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.message,
+                            size: 16,
+                            color: Colors.white38,
+                          ),
+                        ),
+                        activeItem: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.message,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                        itemLabel: "Chat"),
+                    BottomBarItem(
+                        inActiveItem: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.user,
+                            size: 16,
+                            color: Colors.white38,
+                          ),
+                        ),
+                        activeItem: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.user,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                        itemLabel: "Profile"),
+                  ],
+                  onTap: (int index) {
+                    _pageController.jumpToPage(index);
+                  },
+                )
+              : null,
+          extendBody: true,
         ),
-        bottomNavigationBar: AnimatedNotchBottomBar(
-          notchBottomBarController: _controller,
-          showShadow: false,
-          durationInMilliSeconds: 300,
-          color: const Color(0xFF222B45),
-          showLabel: true,
-          notchColor: const Color(0xFFE22F67),
-          bottomBarWidth: MediaQuery.of(context).size.width,
-          removeMargins: false,
-          bottomBarItems: const [
-            BottomBarItem(
-                inActiveItem: Center(
-                    child: FaIcon(
-                  FontAwesomeIcons.house,
-                  size: 16,
-                  color: Colors.white38,
-                )),
-                activeItem: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.house,
-                    size: 16,
-                    color: Colors.white,
-                  ),
-                ),
-                itemLabel: "Home"),
-            BottomBarItem(
-                inActiveItem: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.fire,
-                    size: 16,
-                    color: Colors.white38,
-                  ),
-                ),
-                activeItem: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.fire,
-                    size: 16,
-                    color: Colors.white,
-                  ),
-                ),
-                itemLabel: "Trending"),
-            BottomBarItem(
-                inActiveItem: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.compass,
-                    size: 16,
-                    color: Colors.white38,
-                  ),
-                ),
-                activeItem: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.compass,
-                    size: 16,
-                    color: Colors.white,
-                  ),
-                ),
-                itemLabel: "Explore"),
-            BottomBarItem(
-                inActiveItem: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.message,
-                    size: 16,
-                    color: Colors.white38,
-                  ),
-                ),
-                activeItem: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.message,
-                    size: 16,
-                    color: Colors.white,
-                  ),
-                ),
-                itemLabel: "Chat"),
-            BottomBarItem(
-                inActiveItem: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.user,
-                    size: 16,
-                    color: Colors.white38,
-                  ),
-                ),
-                activeItem: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.user,
-                    size: 16,
-                    color: Colors.white,
-                  ),
-                ),
-                itemLabel: "Profile"),
-          ],
-          onTap: (int index) {
-            _pageController.jumpToPage(index);
-          },
-        ),
-        extendBody: true,
-      )),
+      ),
       routes: {
         PodcastPlayer.route: (context) {
           final Map arguments =
