@@ -161,9 +161,10 @@ class _PodCastApp extends State<PodCastApp> {
         PodcastPlayer.route: (context) {
           final Map arguments =
               ModalRoute.of(context)!.settings.arguments as Map;
-          return PodcastPlayer(
+          return Scaffold(
+              body: PodcastPlayer(
             arguments: arguments,
-          );
+          ));
         },
         PodCastHome.route: (context) => const Scaffold(
               body: PodCastHome(),
