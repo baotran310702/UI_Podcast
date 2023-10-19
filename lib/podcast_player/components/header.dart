@@ -15,7 +15,7 @@ class Header extends StatelessWidget {
           children: [
             GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushNamed(context, '/');
                 },
                 child: const FaIcon(
                   FontAwesomeIcons.arrowLeft,

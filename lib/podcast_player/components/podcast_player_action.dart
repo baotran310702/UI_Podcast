@@ -1,9 +1,12 @@
+import 'package:firstproject/home/model/podcast.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firstproject/home/data/data.dart';
 
 class PodcastPlayerAction extends StatelessWidget {
-  const PodcastPlayerAction({super.key});
+  final Podcast? currentPodcast;
+
+  const PodcastPlayerAction({super.key, this.currentPodcast});
 
   void handleOnchange() {}
 
@@ -28,7 +31,7 @@ class PodcastPlayerAction extends StatelessWidget {
                       ],
                       borderRadius: BorderRadius.circular(10.0),
                       image: DecorationImage(
-                          image: NetworkImage(Data.listpodcast[0].img),
+                          image: NetworkImage(currentPodcast!.img),
                           fit: BoxFit.cover)),
                   child: null,
                 ),
@@ -44,9 +47,9 @@ class PodcastPlayerAction extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.only(top: 28),
-              child: const Text(
-                "Sound Worth Saving",
-                style: TextStyle(
+              child: Text(
+                currentPodcast!.name,
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.w600),
@@ -80,7 +83,27 @@ class PodcastPlayerAction extends StatelessWidget {
                           value: 20.0, max: 100, onChanged: (double value) {}))
                 ],
               ),
-            )
+            ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 8, left: 16, right: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Favourite Podcast Episodes",
+                    style: TextStyle(
+                        color: Color(0xFFFFFFFF),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    "View all",
+                    style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 10),
+                  ),
+                ],
+              ),
+            ),
           ],
         ));
   }

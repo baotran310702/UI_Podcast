@@ -1,11 +1,13 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'data/data.dart';
 import 'components/category.dart';
 import 'components/header.dart';
 import 'components/search_bar.dart';
 import 'components/best_podcast.dart';
 
 class PodCastHome extends StatelessWidget {
+  static const route = '';
   const PodCastHome({super.key});
 
   @override
@@ -13,11 +15,11 @@ class PodCastHome extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       color: const Color(0xFF192038),
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Header(),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          const Header(),
+          const Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             Padding(
                 padding: EdgeInsets.only(
                   left: 16,
@@ -29,10 +31,10 @@ class PodCastHome extends StatelessWidget {
                   style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                 ))
           ]),
-          SearchHome(),
-          Category(),
+          const SearchHome(),
+          const Category(),
           BestPodcast(
-            Amount: 5,
+            listPodcast: Data.listpodcast,
           )
         ],
       ),
