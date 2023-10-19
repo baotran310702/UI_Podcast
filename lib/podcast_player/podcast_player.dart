@@ -2,7 +2,6 @@ import 'package:firstproject/home/components/best_podcast.dart';
 import 'package:firstproject/home/model/podcast.dart';
 import 'package:firstproject/podcast_player/components/header.dart';
 import 'package:firstproject/podcast_player/components/podcast_player_action.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PodcastPlayer extends StatelessWidget {

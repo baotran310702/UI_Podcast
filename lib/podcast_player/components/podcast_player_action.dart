@@ -1,14 +1,25 @@
 import 'package:firstproject/home/model/podcast.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:firstproject/home/data/data.dart';
 
-class PodcastPlayerAction extends StatelessWidget {
+class PodcastPlayerAction extends StatefulWidget {
   final Podcast? currentPodcast;
 
-  const PodcastPlayerAction({super.key, this.currentPodcast});
+  const PodcastPlayerAction({Key? key, this.currentPodcast}) : super(key: key);
 
-  void handleOnchange() {}
+  @override
+  _PodcastPlayerActionState createState() => _PodcastPlayerActionState();
+}
+
+class _PodcastPlayerActionState extends State<PodcastPlayerAction> {
+  double sliderValue = 20.0;
+
+  // Initial value for the Slider
+  void handleOnchange(double value) {
+    setState(() {
+      sliderValue = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +42,7 @@ class PodcastPlayerAction extends StatelessWidget {
                       ],
                       borderRadius: BorderRadius.circular(10.0),
                       image: DecorationImage(
-                          image: NetworkImage(currentPodcast!.img),
+                          image: NetworkImage(widget.currentPodcast!.img),
                           fit: BoxFit.cover)),
                   child: null,
                 ),
@@ -46,13 +57,15 @@ class PodcastPlayerAction extends StatelessWidget {
               ],
             ),
             Container(
-              padding: const EdgeInsets.only(top: 28),
+              padding: const EdgeInsets.only(top: 28, left: 16, right: 16),
+              alignment: Alignment.center,
               child: Text(
-                currentPodcast!.name,
+                widget.currentPodcast!.name,
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center,
               ),
             ),
             Container(
@@ -80,7 +93,11 @@ class PodcastPlayerAction extends StatelessWidget {
                               const Color(0xFFFFFFFF).withOpacity(0.3),
                           thumbColor: Colors.white),
                       child: Slider(
-                          value: 20.0, max: 100, onChanged: (double value) {}))
+                          value: sliderValue,
+                          max: 100,
+                          onChanged: (double value) {
+                            handleOnchange(value);
+                          }))
                 ],
               ),
             ),
