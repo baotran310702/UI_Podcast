@@ -84,6 +84,10 @@ class RowPodcast extends StatelessWidget {
                           podcast!.img,
                           height: 48.0,
                           width: 48.0,
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            return Image.asset('lib/assets/default.png');
+                          },
                         ),
                       ),
                     ),
