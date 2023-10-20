@@ -121,7 +121,13 @@ class ImagesCover extends StatelessWidget {
             width: 100,
             child: ImageFiltered(
               imageFilter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: Image.network(img!),
+              child: Image.network(img!,
+                errorBuilder: (BuildContext context, Object error,
+                    StackTrace? stackTrace) {
+                  return Image.asset('lib/assets/default.png');
+                },
+              ),
+              
             ),
           ),
         ),
