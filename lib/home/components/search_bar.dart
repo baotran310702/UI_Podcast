@@ -23,16 +23,18 @@ class SearchHome extends StatelessWidget {
                 child: FaIcon(FontAwesomeIcons.magnifyingGlass,
                     color: Colors.white, size: 16)),
             Expanded(
-                child: Center(
-                    child: TextField(
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  hintText: "Search",
-                  hintStyle: TextStyle(color: Colors.white30)),
-              style: TextStyle(color: Colors.white),
-            )))
+              child: Center(
+                child: TextField(
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      hintText: "Search",
+                      hintStyle: TextStyle(color: Colors.white30)),
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
           ],
         ),
       ]),

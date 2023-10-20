@@ -166,9 +166,9 @@ class _PodCastApp extends State<PodCastApp> {
             arguments: arguments,
           ));
         },
-        PodCastHome.route: (context) => const Scaffold(
-              body: PodCastHome(),
-            )
+        PodCastHome.route: (context) {
+          return const PodCastHome();
+        }
       },
     );
   }
